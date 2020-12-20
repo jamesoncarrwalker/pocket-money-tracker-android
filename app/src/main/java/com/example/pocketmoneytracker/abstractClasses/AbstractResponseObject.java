@@ -5,10 +5,27 @@ import java.util.Map;
 
 import com.example.pocketmoneytracker.interfaces.ResponseObjectInterface;
 
+import org.json.JSONObject;
+
 public abstract class AbstractResponseObject implements ResponseObjectInterface {
 
     protected Object rawResponse;
     protected Map<String,Object> parsedResponse = new HashMap<>();
+
+    @Override
+    public void setRawResponse(Object response) {
+        this.rawResponse = response;
+    }
+
+    @Override
+    public void parseResponse(Object response) {
+        this.setRawResponse(response);
+    }
+
+    @Override
+    public void parseResponse(JSONObject response) {
+        this.setRawResponse(response);
+    }
 
     @Override
     public Map<String, Object> getResponse() {

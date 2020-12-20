@@ -2,40 +2,63 @@ package com.example.pocketmoneytracker;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
+import com.example.pocketmoneytracker.adapter.TransactionAdapter;
 import com.example.pocketmoneytracker.datasource.TransactionApiObjectRequestObject;
 import com.example.pocketmoneytracker.enums.EnvVar;
 import com.example.pocketmoneytracker.interfaces.ResponseHandlerInterface;
+import com.example.pocketmoneytracker.models.Transaction;
 import com.example.pocketmoneytracker.responseObjects.TransactionResponseObject;
+import com.example.pocketmoneytracker.utils.Logging;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements ResponseHandlerInterface {
 
-    TextView helloWorld;
-    Button submitButton;
     TransactionApiObjectRequestObject transactionApiObject;
+    RecyclerView basicRecycler;
+    ArrayList<Transaction> transactions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        helloWorld = findViewById(R.id.hello_world_text_view);
-        submitButton = findViewById(R.id.submit_button);
         transactionApiObject = new TransactionApiObjectRequestObject(EnvVar.PROD.getVar(), new TransactionResponseObject(),this, this);
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getTransactions();
-            }
-        });
 
+        checkForTransactions();
+
+    }
+
+    private void setupRecycler() {
+        basicRecycler = findViewById(R.id.skeleton_recycler_list);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
+        basicRecycler.setLayoutManager(manager);
+    }
+
+    private void updateAdapter() {
+        if(null == basicRecycler) {
+            setupRecycler();
+        }
+        basicRecycler.setAdapter(null);
+        basicRecycler.setAdapter(new TransactionAdapter(transactions));
+    }
+
+    private void checkForTransactions() {
+        if(null == transactionApiObject) return;
+        transactionApiObject.getTransactions();
     }
 
     @Override
     public void passResponse(Object response) {
-        helloWorld.setText(response.toString());
+        if(response instanceof Map) {
+            Map map = (Map) response;
+            ArrayList<Transaction> values = new ArrayList<>(map.values());
+            this.transactions = values;
+            updateAdapter();
+        }
     }
 
     public void getTransactions() {

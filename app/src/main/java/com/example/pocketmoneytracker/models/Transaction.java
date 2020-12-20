@@ -43,4 +43,8 @@ public class Transaction {
     public Date getTransactionDate() {
         return transactionDate;
     }
+
+    public String getFriendlyDateString() {
+        return String.valueOf(transactionDate);
+    }
 }

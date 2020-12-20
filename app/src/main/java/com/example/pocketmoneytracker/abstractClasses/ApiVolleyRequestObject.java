@@ -67,14 +67,10 @@ public  class ApiVolleyRequestObject extends AbstractApiRequest {
         setupRequestQueue();
         setRequestUrl();
         setRequestData();
-        Logging.logStr("******!!!REQUESTING BIULD!!!!","ApiVolleyRequestObject::70");
-        Logging.logStr("******!!!this.requestMethod!!!!",String.valueOf(this.requestMethod));
-        Logging.logStr("******!!!ApiRequestMethod.GET!!!!",String.valueOf(ApiRequestMethod.GET));
         if(this.requestMethod == ApiRequestMethod.GET) {
 
             final StringRequest stringRequest = buildStringRequestObject();
             stringRequest.setShouldCache(false);
-            Logging.logStr("******!!!String Request!!!!",String.valueOf(stringRequest));
             this.requestQueue.add(stringRequest);
 
         } else {
@@ -122,7 +118,6 @@ public  class ApiVolleyRequestObject extends AbstractApiRequest {
             new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Logging.logStr("StringResponse",response);//for debugging
                     try{
                         handleApiSuccessResponse(new JSONObject(response));
                     } catch (JSONException e) {

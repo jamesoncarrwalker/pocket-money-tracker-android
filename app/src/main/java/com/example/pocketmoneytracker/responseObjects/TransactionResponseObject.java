@@ -22,8 +22,7 @@ public class TransactionResponseObject extends AbstractResponseObject {
 
     @Override
     public void parseResponse(JSONObject response) {
-        Map<String, Transaction> parsedResponse = new HashMap<>();
-
+        super.parseResponse(response);
         try {
             JSONArray transactionsArray = response.getJSONArray("transactions");
 
@@ -45,23 +44,18 @@ public class TransactionResponseObject extends AbstractResponseObject {
 
                 String description = jsonTransaction.getString("transaction_description");
                 try {
-                    transactionDate = DateConverter.dateFromString(jsonTransaction.getString("transaction_added"), "E d M");
+                    transactionDate = DateConverter.dateFromString(jsonTransaction.getString("transaction_added"), "yyyy-MM-dd HH:mm:ss");
                 } catch (ParseException e) {
-                    Log.d("DATE ERROR", "Could not parse the date for " + jsonTransaction.getString("UUID"));
+                    Log.d("DATE ERROR", "Could not parse the date for " + jsonTransaction.getString("transaction_added"));
                 }
 
                 Transaction transaction = new Transaction(uuid, amount, transactionType, description, transactionDate);
-
+                this.parsedResponse.put(String.valueOf(transaction.getUuid()),transaction);
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-    }
-
-    @Override
-    public void parseResponse(Object response) {
 
     }
 

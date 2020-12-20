@@ -6,6 +6,8 @@ import java.util.Map;
 
 public interface ResponseObjectInterface {
 
+    void setRawResponse(Object response);
+
     void parseResponse(Object response);
 
     void parseResponse(JSONObject response);
