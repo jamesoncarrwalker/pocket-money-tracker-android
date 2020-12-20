@@ -2,20 +2,18 @@ package com.example.pocketmoneytracker.responseObjects;
 
 import android.util.Log;
 
+import com.example.pocketmoneytracker.abstractClasses.AbstractResponseObject;
+import com.example.pocketmoneytracker.enums.TransactionType;
+import com.example.pocketmoneytracker.helpers.DateConverter;
+import com.example.pocketmoneytracker.models.Transaction;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
-
-import com.example.pocketmoneytracker.abstractClasses.AbstractResponseObject;
-import com.example.pocketmoneytracker.enums.TransactionType;
-import com.example.pocketmoneytracker.helpers.DateConverter;
-import com.example.pocketmoneytracker.models.Transaction;
 
 public class TransactionResponseObject extends AbstractResponseObject {
 

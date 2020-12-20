@@ -1,9 +1,9 @@
 package com.example.pocketmoneytracker.models;
 
+import com.example.pocketmoneytracker.enums.TransactionType;
+
 import java.util.Date;
 import java.util.UUID;
-
-import com.example.pocketmoneytracker.enums.TransactionType;
 
 
 public class Transaction {

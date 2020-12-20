@@ -1,8 +1,8 @@
 package com.example.pocketmoneytracker.interfaces;
 
-import java.util.Map;
-
 import com.example.pocketmoneytracker.enums.ApiRequestMethod;
+
+import java.util.Map;
 
 public interface APIRequestInterface {
 

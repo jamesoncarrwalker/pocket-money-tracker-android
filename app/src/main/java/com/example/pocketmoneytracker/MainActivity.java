@@ -1,7 +1,7 @@
 package com.example.pocketmoneytracker;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -11,7 +11,6 @@ import com.example.pocketmoneytracker.enums.EnvVar;
 import com.example.pocketmoneytracker.interfaces.ResponseHandlerInterface;
 import com.example.pocketmoneytracker.models.Transaction;
 import com.example.pocketmoneytracker.responseObjects.TransactionResponseObject;
-import com.example.pocketmoneytracker.utils.Logging;
 
 import java.util.ArrayList;
 import java.util.Map;

@@ -1,11 +1,11 @@
 package com.example.pocketmoneytracker.abstractClasses;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.example.pocketmoneytracker.interfaces.ResponseObjectInterface;
 
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class AbstractResponseObject implements ResponseObjectInterface {
 
