@@ -109,8 +109,7 @@ public class MainActivity extends AppCompatActivity implements ResponseHandlerIn
     private void initTransactionApiObject() {
         EnvVar apiBase = DynamicEnvSelector.EnvVar(DynamicEnvValue.API_BASE);
         assert apiBase != null;
-//        this.transactionApiObject = new TransactionApiObjectRequestObject(apiBase.getVar(), new TransactionResponseObject(), this, this);
-        this.transactionApiObject = new TransactionApiObjectRequestObject(EnvVar.PROD.getVar(), new TransactionResponseObject(), this, this);
+        this.transactionApiObject = new TransactionApiObjectRequestObject(apiBase.getVar(), new TransactionResponseObject(), this, this);
     }
 
     private void resetBalance() {

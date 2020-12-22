@@ -13,4 +13,11 @@ public class DateConverter {
         DateFormat format = new SimpleDateFormat(formatPattern, Locale.ENGLISH);
         return format.parse(dateString);
     }
+
+    public static String dateStringFromDate(Date date, String formatPattern) {
+        DateFormat format = new SimpleDateFormat(formatPattern, Locale.ENGLISH);
+
+        return format.format(date);
+    }
+
 }

@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.pocketmoneytracker.R;
+import com.example.pocketmoneytracker.enums.EnvVar;
+import com.example.pocketmoneytracker.helpers.DateConverter;
 import com.example.pocketmoneytracker.helpers.ViewFormatter;
 import com.example.pocketmoneytracker.models.Transaction;
 
@@ -33,7 +35,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public void onBindViewHolder(@NonNull TransactionAdapter.ViewHolder transactionDisplayHolder, int transactionArrayPosition) {
         Transaction currentTransaction = this.transactions.get(transactionArrayPosition);
         transactionDisplayHolder.descriptionView.setText(currentTransaction.getDescription());
-        transactionDisplayHolder.dateView.setText(currentTransaction.getFriendlyDateString());
+        transactionDisplayHolder.dateView.setText(DateConverter.dateStringFromDate(currentTransaction.getTransactionDate(), EnvVar.FRIENDLY_DATE_PATTERN.getVar()));
         ViewFormatter.formatTransactionTextView(transactionDisplayHolder.amountView, currentTransaction.getTransactionType(), currentTransaction.getAmount());
 
     }
