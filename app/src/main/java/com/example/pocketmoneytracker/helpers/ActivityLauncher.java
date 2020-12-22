@@ -13,7 +13,7 @@ public class ActivityLauncher implements ActivityLauncherInterface {
     @Override
     public void launchActivity(String packageName, String activityName, Context context, Bundle bundle) {
         try {
-            Class<?> className = Class.forName( EnvVar.BASE_PACKAGE.getVar() + "." + packageName + "." + activityName);
+            Class<?> className = Class.forName(EnvVar.BASE_PACKAGE.getVar() + "." + packageName + "." + activityName);
             Intent intent = new Intent(context, className);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -4,5 +4,5 @@ import java.util.Map;
 
 public interface CreateFromApiResponseInterface {
 
-    Map<String,Object> createFromApiResponse(Object apiResponseData);
+    Map<String, Object> createFromApiResponse(Object apiResponseData);
 }

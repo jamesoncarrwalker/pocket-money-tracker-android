@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements ResponseHandlerIn
     }
 
     private void updateAdapter() {
-        if(null == basicRecycler) {
+        if (null == basicRecycler) {
             setupRecycler();
         }
         basicRecycler.setAdapter(null);
@@ -62,27 +62,27 @@ public class MainActivity extends AppCompatActivity implements ResponseHandlerIn
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void updateBalance() {
-        if(null == this.transactionAmountView) {
+        if (null == this.transactionAmountView) {
             this.transactionAmountView = findViewById(R.id.balance_view);
         }
-        if(null == this.transactions || this.transactions.size() < 1) {
+        if (null == this.transactions || this.transactions.size() < 1) {
             this.totalBalance = null;
             this.totalBalanceTransactionType = TransactionType.BLACK;
         } else {
-            if(null == this.balanceCalculator) {
+            if (null == this.balanceCalculator) {
                 this.balanceCalculator = new BalanceCalculator(this.transactions);
             }
             this.totalBalance = this.balanceCalculator.getBalance();
             this.totalBalanceTransactionType = this.balanceCalculator.getBalanceType();
         }
 
-        ViewFormatter.formatTransactionTextView(this.transactionAmountView, this.totalBalanceTransactionType,this.totalBalance);
+        ViewFormatter.formatTransactionTextView(this.transactionAmountView, this.totalBalanceTransactionType, this.totalBalance);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void passResponse(Object response) {
-        if(response instanceof Map) {
+        if (response instanceof Map) {
             Map map = (Map) response;
             ArrayList<Transaction> values = new ArrayList<>(map.values());
             this.transactions = values;
@@ -92,27 +92,27 @@ public class MainActivity extends AppCompatActivity implements ResponseHandlerIn
     }
 
     public void getTransactions() {
-        if(null == this.transactionApiObject) {
+        if (null == this.transactionApiObject) {
             initTransactionApiObject();
         }
         this.transactionApiObject.getTransactions();
     }
 
     public void addTransactionLauncher(View view) {
-        if(null == this.activityLauncher) {
+        if (null == this.activityLauncher) {
             this.activityLauncher = new ActivityLauncher();
         }
 
-        activityLauncher.launchActivity("activities","AddTransactionActivity",this,null);
+        activityLauncher.launchActivity("activities", "AddTransactionActivity", this, null);
     }
 
     private void updateBalanceView() {
-        String balanceString = NumberToStringConverter.getTransactionStringFromFloat(this.totalBalance, this.totalBalanceTransactionType, EnvVar.CURRENCY_STRING_PATTERN.getVar(), EnvVar.CURRENCY_SYMBOL.getVar() );
+        String balanceString = NumberToStringConverter.getTransactionStringFromFloat(this.totalBalance, this.totalBalanceTransactionType, EnvVar.CURRENCY_STRING_PATTERN.getVar(), EnvVar.CURRENCY_SYMBOL.getVar());
 
         this.transactionAmountView.setText(balanceString);
     }
 
     private void initTransactionApiObject() {
-        this.transactionApiObject = new TransactionApiObjectRequestObject(EnvVar.PROD.getVar(), new TransactionResponseObject(),this, this);
+        this.transactionApiObject = new TransactionApiObjectRequestObject(EnvVar.PROD.getVar(), new TransactionResponseObject(), this, this);
     }
 }

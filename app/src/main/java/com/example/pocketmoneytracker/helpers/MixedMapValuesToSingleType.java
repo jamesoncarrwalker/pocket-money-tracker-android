@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class MixedMapValuesToSingleType {
 
-    public static Map<String, String> convertValuesToString(Map<String,Object> originalMap) {
+    public static Map<String, String> convertValuesToString(Map<String, Object> originalMap) {
         Map<String, String> mapToReturn = new HashMap<>();
         for (Map.Entry<String, Object> entry : originalMap.entrySet()) {
             String key = entry.getKey();

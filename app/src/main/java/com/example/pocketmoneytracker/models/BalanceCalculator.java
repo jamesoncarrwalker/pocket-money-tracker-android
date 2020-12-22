@@ -11,16 +11,16 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class BalanceCalculator {
 
-    private Map<String,Transaction> transactionsMap;
+    private Map<String, Transaction> transactionsMap;
     private ArrayList<Transaction> transactionsArray;
-    private Float credit,debit, balance;
+    private Float credit, debit, balance;
 
-    public BalanceCalculator(Float credit, Float debit){
+    public BalanceCalculator(Float credit, Float debit) {
         this.credit = credit;
         this.debit = debit;
     }
 
-    public BalanceCalculator(Map<String,Transaction> transactionsMap) {
+    public BalanceCalculator(Map<String, Transaction> transactionsMap) {
         this.transactionsMap = transactionsMap;
     }
 
@@ -30,7 +30,7 @@ public class BalanceCalculator {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public Float getBalance() {
-        if(null == this.balance) {
+        if (null == this.balance) {
             try {
                 calculateBalance();
             } catch (Exception e) {
@@ -43,11 +43,11 @@ public class BalanceCalculator {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void calculateBalance() throws Exception {
-        if(null == credit && null == debit && null == transactionsMap && null == transactionsArray) {
+        if (null == credit && null == debit && null == transactionsMap && null == transactionsArray) {
             throw new Exception("No information to calculate a balance");
         }
 
-        if(null == transactionsMap && null == transactionsArray) {
+        if (null == transactionsMap && null == transactionsArray) {
             calculateFromCreditDebit();
         } else {
             calculateFromTransactions();
@@ -59,7 +59,7 @@ public class BalanceCalculator {
     }
 
     public TransactionType getBalanceType() {
-        if(null == this.balance || this.balance >= 0){
+        if (null == this.balance || this.balance >= 0) {
             return TransactionType.BLACK;
         }
 
@@ -69,7 +69,7 @@ public class BalanceCalculator {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void calculateFromTransactions() {
 
-        if(null == transactionsArray ) {
+        if (null == transactionsArray) {
 //            this.balance = getTotal(this.transactionsMap.entrySet());
         } else {
             this.balance = getTotal(this.transactionsArray);
@@ -79,13 +79,13 @@ public class BalanceCalculator {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public Float getTotal(ArrayList<Transaction> transactions) {
-        if(null == transactions || 0 == transactions.size()) {
+        if (null == transactions || 0 == transactions.size()) {
             return null;
         }
 
         AtomicReference<Float> total = new AtomicReference<>(0f);
         transactions.forEach((transaction) -> {
-            if(transaction.getTransactionType() == TransactionType.CREDIT) {
+            if (transaction.getTransactionType() == TransactionType.CREDIT) {
                 total.set(total.get() + transaction.getAmount());
             } else {
                 total.set(total.get() - transaction.getAmount());

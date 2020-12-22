@@ -2,34 +2,30 @@ package com.example.pocketmoneytracker.abstractClasses;
 
 import android.content.Context;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.pocketmoneytracker.enums.ApiRequestMethod;
 import com.example.pocketmoneytracker.helpers.MixedMapValuesToSingleType;
 import com.example.pocketmoneytracker.interfaces.ResponseHandlerInterface;
 import com.example.pocketmoneytracker.interfaces.ResponseObjectInterface;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.pocketmoneytracker.utils.Logging;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public  class ApiVolleyRequestObject extends AbstractApiRequest {
+import java.util.HashMap;
+import java.util.Map;
 
-    private RequestQueue requestQueue;
+public class ApiVolleyRequestObject extends AbstractApiRequest {
+
     public Map<String, Object> apiResponse;
-
+    private RequestQueue requestQueue;
     //don't affect the original data
     private String jsonPostString;
-
 
 
     public ApiVolleyRequestObject(String baseUrl, ResponseObjectInterface responseObject, Context context) {
@@ -67,7 +63,7 @@ public  class ApiVolleyRequestObject extends AbstractApiRequest {
         setupRequestQueue();
         setRequestUrl();
         setRequestData();
-        if(this.requestMethod == ApiRequestMethod.GET) {
+        if (this.requestMethod == ApiRequestMethod.GET) {
 
             final StringRequest stringRequest = buildStringRequestObject();
             stringRequest.setShouldCache(false);
@@ -113,12 +109,12 @@ public  class ApiVolleyRequestObject extends AbstractApiRequest {
     }
 
     private StringRequest buildStringRequestObject() {
-        final Map<String,Object> finalData = this.rawData;
+        final Map<String, Object> finalData = this.rawData;
         return new StringRequest(getVolleyRequestMethod(), this.requestUrl,
             new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    try{
+                    try {
                         handleApiSuccessResponse(new JSONObject(response));
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -131,11 +127,11 @@ public  class ApiVolleyRequestObject extends AbstractApiRequest {
                     handleApiErrorResponse(error);
 //                    Util.logStr("API error",error.toString());
                 }
-            }){
-        @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<>();
-                if(null != finalData && 0 != finalData.size()) {
+            }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                if (null != finalData && 0 != finalData.size()) {
                     return MixedMapValuesToSingleType.convertValuesToString(finalData);
                 }
                 return params;
@@ -145,7 +141,7 @@ public  class ApiVolleyRequestObject extends AbstractApiRequest {
 
     private int getVolleyRequestMethod() {
 
-        switch(this.requestMethod) {
+        switch (this.requestMethod) {
             case POST:
                 return Request.Method.POST;
             default:
