@@ -12,9 +12,11 @@ import android.widget.TextView;
 import com.example.pocketmoneytracker.R;
 import com.example.pocketmoneytracker.adapter.TransactionAdapter;
 import com.example.pocketmoneytracker.datasource.TransactionApiObjectRequestObject;
+import com.example.pocketmoneytracker.enums.DynamicEnvValue;
 import com.example.pocketmoneytracker.enums.EnvVar;
 import com.example.pocketmoneytracker.enums.TransactionType;
 import com.example.pocketmoneytracker.helpers.ActivityLauncher;
+import com.example.pocketmoneytracker.helpers.DynamicEnvSelector;
 import com.example.pocketmoneytracker.helpers.NumberToStringConverter;
 import com.example.pocketmoneytracker.helpers.ViewFormatter;
 import com.example.pocketmoneytracker.interfaces.ResponseHandlerInterface;
@@ -113,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements ResponseHandlerIn
     }
 
     private void initTransactionApiObject() {
-        this.transactionApiObject = new TransactionApiObjectRequestObject(EnvVar.PROD.getVar(), new TransactionResponseObject(), this, this);
+        EnvVar apiBase = DynamicEnvSelector.EnvVar(DynamicEnvValue.API_BASE);
+        assert apiBase != null;
+        this.transactionApiObject = new TransactionApiObjectRequestObject(apiBase.getVar(), new TransactionResponseObject(), this, this);
     }
 }

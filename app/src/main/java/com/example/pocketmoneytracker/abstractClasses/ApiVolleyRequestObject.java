@@ -13,6 +13,7 @@ import com.example.pocketmoneytracker.enums.ApiRequestMethod;
 import com.example.pocketmoneytracker.helpers.MixedMapValuesToSingleType;
 import com.example.pocketmoneytracker.interfaces.ResponseHandlerInterface;
 import com.example.pocketmoneytracker.interfaces.ResponseObjectInterface;
+import com.example.pocketmoneytracker.utils.Logging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -125,7 +126,7 @@ public class ApiVolleyRequestObject extends AbstractApiRequest {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     handleApiErrorResponse(error);
-//                    Util.logStr("API error",error.toString());
+                    Logging.logStr("API error",error.toString());
                 }
             }) {
             @Override
