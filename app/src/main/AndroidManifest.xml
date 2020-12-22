@@ -12,7 +12,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/Theme.PocketMoneyTracker"
         tools:targetApi="n">
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.TrackerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

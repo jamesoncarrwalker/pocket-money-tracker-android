@@ -26,7 +26,7 @@ import com.example.pocketmoneytracker.responseObjects.TransactionResponseObject;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements ResponseHandlerInterface {
+public class TrackerActivity extends AppCompatActivity implements ResponseHandlerInterface {
 
     TransactionApiObjectRequestObject transactionApiObject;
     RecyclerView basicRecycler;
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements ResponseHandlerIn
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_tracker);
         updateBalance();
         getTransactions();
 
