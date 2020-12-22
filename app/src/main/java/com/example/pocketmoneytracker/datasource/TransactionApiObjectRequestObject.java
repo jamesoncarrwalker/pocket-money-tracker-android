@@ -7,6 +7,8 @@ import com.example.pocketmoneytracker.enums.ApiRequestMethod;
 import com.example.pocketmoneytracker.interfaces.ResponseHandlerInterface;
 import com.example.pocketmoneytracker.interfaces.ResponseObjectInterface;
 
+import java.util.Map;
+
 public class TransactionApiObjectRequestObject extends ApiVolleyRequestObject {
 
 
@@ -20,5 +22,9 @@ public class TransactionApiObjectRequestObject extends ApiVolleyRequestObject {
 
     public void getTransactions() {
         this.sendRequest(ApiRequestMethod.GET, "/transactions");
+    }
+
+    public void submitSingleTransaction(Map<String,Object> data) {
+        this.sendRequest(ApiRequestMethod.POST,"/transactions", data);
     }
 }
