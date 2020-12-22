@@ -55,7 +55,7 @@ public abstract class AbstractApiRequest implements APIRequestInterface {
     }
 
     @Override
-    public ResponseObjectInterface getResponse() {
+    public ResponseObjectInterface getResponseObject() {
         return this.responseObject;
     }
 

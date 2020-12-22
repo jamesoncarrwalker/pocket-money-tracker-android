@@ -34,7 +34,7 @@ public class TransactionResponseObject extends AbstractResponseObject {
                 JSONObject jsonTransaction = transactionsArray.getJSONObject(i);
                 UUID uuid = UUID.fromString(jsonTransaction.getString("UUID"));
                 Float amount = Float.parseFloat(jsonTransaction.getString("transaction_amount"));
-                TransactionType transactionType = TransactionType.CREDIT;
+                TransactionType transactionType;
 
                 try {
                     transactionType = TransactionType.valueOf(jsonTransaction.getString("transaction_type"));

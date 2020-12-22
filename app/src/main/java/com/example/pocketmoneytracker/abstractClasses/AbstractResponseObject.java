@@ -38,4 +38,9 @@ public abstract class AbstractResponseObject implements ResponseObjectInterface 
         this.parsedResponse = new HashMap<>();
         this.rawResponse = null;
     }
+
+    ///::TODO SET A FIELDS TO SEARCH FOR REQUIREMENT IN THE INTERFACE TO BE IMPLEMENTED BY THE CHILD CLASS
+    ///::TODO THEN CHECK THE FIELD EXISTS THERE AND PROCESS CORRECTLY ADDING TO  parsedResponse
+    ///::TODO ADD ANY FIELDS NOT SEARCHED FOR HERE IN PARSED RESPONSE
+    ///::TODO REMOVE RAW RESPONSE AS ACHIEVING NOTHING AT ALL
 }

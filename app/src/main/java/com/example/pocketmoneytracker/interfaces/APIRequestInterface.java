@@ -10,7 +10,7 @@ public interface APIRequestInterface {
 
     void sendRequest(ApiRequestMethod requestMethod, String endPoint);
 
-    ResponseObjectInterface getResponse();
+    ResponseObjectInterface getResponseObject();
 
     void resetRequest();
 
