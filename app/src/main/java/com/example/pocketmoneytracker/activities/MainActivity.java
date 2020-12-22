@@ -58,8 +58,11 @@ public class MainActivity extends AppCompatActivity implements ResponseHandlerIn
             setupRecycler();
         }
         basicRecycler.setAdapter(null);
-        basicRecycler.setAdapter(new TransactionAdapter(transactions));
-    }
+        if(null != transactions) {
+            basicRecycler.setAdapter(new TransactionAdapter(transactions));
+        }
+        }
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void updateBalance() {
@@ -80,8 +83,9 @@ public class MainActivity extends AppCompatActivity implements ResponseHandlerIn
     public void passResponse(Object response) {
         if (response instanceof Map) {
             Map map = (Map) response;
-            ArrayList<Transaction> values = new ArrayList<>(map.values());
-            this.transactions = values;
+            if(map.containsKey("transactions")) {
+                this.transactions = (ArrayList<Transaction>)map.get("transactions");
+            }
             updateAdapter();
             updateBalance();
         }
@@ -105,7 +109,8 @@ public class MainActivity extends AppCompatActivity implements ResponseHandlerIn
     private void initTransactionApiObject() {
         EnvVar apiBase = DynamicEnvSelector.EnvVar(DynamicEnvValue.API_BASE);
         assert apiBase != null;
-        this.transactionApiObject = new TransactionApiObjectRequestObject(apiBase.getVar(), new TransactionResponseObject(), this, this);
+//        this.transactionApiObject = new TransactionApiObjectRequestObject(apiBase.getVar(), new TransactionResponseObject(), this, this);
+        this.transactionApiObject = new TransactionApiObjectRequestObject(EnvVar.PROD.getVar(), new TransactionResponseObject(), this, this);
     }
 
     private void resetBalance() {

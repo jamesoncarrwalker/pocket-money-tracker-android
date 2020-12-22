@@ -12,15 +12,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
 public class TransactionResponseObject extends AbstractResponseObject {
 
+    private ArrayList<Transaction> transactions;
 
     @Override
     public void parseResponse(JSONObject response) {
         super.parseResponse(response);
+        ArrayList<Transaction> transactionsFromResponse = new ArrayList<>();
         try {
             JSONArray transactionsArray = response.getJSONArray("transactions");
 
@@ -48,8 +51,10 @@ public class TransactionResponseObject extends AbstractResponseObject {
                 }
 
                 Transaction transaction = new Transaction(uuid, amount, transactionType, description, transactionDate);
-                this.parsedResponse.put(String.valueOf(transaction.getUuid()), transaction);
+                transactionsFromResponse.add(0, transaction);
             }
+
+            this.parsedResponse.put("transactions",transactionsFromResponse);
 
         } catch (JSONException e) {
             e.printStackTrace();
