@@ -2,13 +2,13 @@ package com.example.pocketmoneytracker.abstractClasses;
 
 import android.content.Context;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.example.pocketmoneytracker.enums.ApiRequestMethod;
 import com.example.pocketmoneytracker.interfaces.APIRequestInterface;
 import com.example.pocketmoneytracker.interfaces.ResponseHandlerInterface;
 import com.example.pocketmoneytracker.interfaces.ResponseObjectInterface;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public abstract class AbstractApiRequest implements APIRequestInterface {
 

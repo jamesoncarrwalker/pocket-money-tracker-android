@@ -1,5 +1,6 @@
 package com.example.pocketmoneytracker.adapter;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.pocketmoneytracker.R;
+import com.example.pocketmoneytracker.enums.EnvVar;
+import com.example.pocketmoneytracker.enums.TransactionType;
+import com.example.pocketmoneytracker.helpers.NumberToStringConverter;
+import com.example.pocketmoneytracker.helpers.ViewFormatter;
 import com.example.pocketmoneytracker.models.Transaction;
 
 import java.util.ArrayList;
@@ -51,14 +56,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         Transaction currentTransaction = this.transactions.get(transactionArrayPosition);
         transactionDisplayHolder.descriptionView.setText(currentTransaction.getDescription());
         transactionDisplayHolder.dateView.setText(currentTransaction.getFriendlyDateString());
-        transactionDisplayHolder.amountView.setText(String.valueOf(currentTransaction.getAmount()));
-
-//        transactionDisplayHolder.transactionWrapper.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //launch the edit/delete transaction activity
-//            }
-//        });
+        ViewFormatter.formatTransactionTextView(transactionDisplayHolder.amountView, currentTransaction.getTransactionType(),currentTransaction.getAmount());
 
     }
 

@@ -1,6 +1,7 @@
 package com.example.pocketmoneytracker.enums;
 
 public enum TransactionType {
+    BLACK("BLACK"),
     CREDIT("CREDIT"),
     SPEND("SPEND");
 
