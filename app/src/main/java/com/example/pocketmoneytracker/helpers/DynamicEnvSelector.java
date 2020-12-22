@@ -4,9 +4,6 @@ import android.os.Build;
 
 import com.example.pocketmoneytracker.enums.DynamicEnvValue;
 import com.example.pocketmoneytracker.enums.EnvVar;
-import com.example.pocketmoneytracker.utils.Logging;
-
-import java.io.File;
 
 public class DynamicEnvSelector {
 
@@ -14,7 +11,7 @@ public class DynamicEnvSelector {
 
         boolean dev = isProbablyEmulator();
 
-        if(envVar == DynamicEnvValue.API_BASE) {
+        if (envVar == DynamicEnvValue.API_BASE) {
             return dev ? EnvVar.DEV : EnvVar.PROD;
         }
         return null;

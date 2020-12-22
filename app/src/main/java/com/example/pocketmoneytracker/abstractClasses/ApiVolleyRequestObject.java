@@ -126,7 +126,7 @@ public class ApiVolleyRequestObject extends AbstractApiRequest {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     handleApiErrorResponse(error);
-                    Logging.logStr("API error",error.toString());
+                    Logging.logStr("API error", error.toString());
                 }
             }) {
             @Override

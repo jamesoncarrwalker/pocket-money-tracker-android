@@ -17,7 +17,6 @@ import com.example.pocketmoneytracker.enums.EnvVar;
 import com.example.pocketmoneytracker.enums.TransactionType;
 import com.example.pocketmoneytracker.helpers.ActivityLauncher;
 import com.example.pocketmoneytracker.helpers.DynamicEnvSelector;
-import com.example.pocketmoneytracker.helpers.NumberToStringConverter;
 import com.example.pocketmoneytracker.helpers.ViewFormatter;
 import com.example.pocketmoneytracker.interfaces.ResponseHandlerInterface;
 import com.example.pocketmoneytracker.models.BalanceCalculator;
@@ -68,14 +67,9 @@ public class MainActivity extends AppCompatActivity implements ResponseHandlerIn
             this.transactionAmountView = findViewById(R.id.balance_view);
         }
         if (null == this.transactions || this.transactions.size() < 1) {
-            this.totalBalance = null;
-            this.totalBalanceTransactionType = TransactionType.BLACK;
+            resetBalance();
         } else {
-            if (null == this.balanceCalculator) {
-                this.balanceCalculator = new BalanceCalculator(this.transactions);
-            }
-            this.totalBalance = this.balanceCalculator.getBalance();
-            this.totalBalanceTransactionType = this.balanceCalculator.getBalanceType();
+            setBalance();
         }
 
         ViewFormatter.formatTransactionTextView(this.transactionAmountView, this.totalBalanceTransactionType, this.totalBalance);
@@ -108,15 +102,23 @@ public class MainActivity extends AppCompatActivity implements ResponseHandlerIn
         activityLauncher.launchActivity("activities", "AddTransactionActivity", this, null);
     }
 
-    private void updateBalanceView() {
-        String balanceString = NumberToStringConverter.getTransactionStringFromFloat(this.totalBalance, this.totalBalanceTransactionType, EnvVar.CURRENCY_STRING_PATTERN.getVar(), EnvVar.CURRENCY_SYMBOL.getVar());
-
-        this.transactionAmountView.setText(balanceString);
-    }
-
     private void initTransactionApiObject() {
         EnvVar apiBase = DynamicEnvSelector.EnvVar(DynamicEnvValue.API_BASE);
         assert apiBase != null;
         this.transactionApiObject = new TransactionApiObjectRequestObject(apiBase.getVar(), new TransactionResponseObject(), this, this);
+    }
+
+    private void resetBalance() {
+        this.totalBalance = null;
+        this.totalBalanceTransactionType = TransactionType.BLACK;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void setBalance() {
+        if (null == this.balanceCalculator) {
+            this.balanceCalculator = new BalanceCalculator(this.transactions);
+        }
+        this.totalBalance = this.balanceCalculator.getBalance();
+        this.totalBalanceTransactionType = this.balanceCalculator.getBalanceType();
     }
 }
