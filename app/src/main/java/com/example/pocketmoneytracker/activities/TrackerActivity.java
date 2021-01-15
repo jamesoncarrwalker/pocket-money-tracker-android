@@ -42,12 +42,11 @@ public class TrackerActivity extends AbstractRequestActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracker);
         updateBalance();
-        getTransactions();
+        submitRequest();
 
     }
 
     private void setupRecycler() {
-        basicRecycler = findViewById(R.id.skeleton_recycler_list);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
         basicRecycler.setLayoutManager(manager);
     }
@@ -65,9 +64,6 @@ public class TrackerActivity extends AbstractRequestActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void updateBalance() {
-        if (null == this.transactionAmountView) {
-            this.transactionAmountView = findViewById(R.id.balance_view);
-        }
         if (null == this.transactions || this.transactions.size() < 1) {
             resetBalance();
         } else {
@@ -90,25 +86,29 @@ public class TrackerActivity extends AbstractRequestActivity {
         }
     }
 
-    public void getTransactions() {
+    private void getTransactions() {
         if (null == this.transactionApiObject) {
-            initTransactionApiObject();
+            initApiRequestObject();
         }
         this.transactionApiObject.getTransactions();
     }
 
     public void addTransactionLauncher(View view) {
-        if (null == this.activityLauncher) {
-            this.activityLauncher = new ActivityLauncher();
-        }
-
         activityLauncher.launchActivity("activities", "AddTransactionActivity", this, null);
     }
 
-    public void initTransactionApiObject() {
+    public void initApiRequestObject() {
         EnvVar apiBase = DynamicEnvSelector.EnvVar(DynamicEnvValue.API_BASE);
         assert apiBase != null;
         this.transactionApiObject = new TransactionApiObjectRequestObject(apiBase.getVar(), new TransactionResponseObject(), this, this);
+    }
+
+    @Override
+    public void submitRequest() {
+        if (null == this.activityLauncher) {
+            this.activityLauncher = new ActivityLauncher();
+        }
+        this.getTransactions();
     }
 
     private void resetBalance() {
@@ -123,5 +123,16 @@ public class TrackerActivity extends AbstractRequestActivity {
         }
         this.totalBalance = this.balanceCalculator.getBalance();
         this.totalBalanceTransactionType = this.balanceCalculator.getBalanceType();
+    }
+
+    @Override
+    public void setupView() {
+        if (null == this.transactionAmountView) {
+            this.transactionAmountView = findViewById(R.id.balance_view);
+        }
+
+        if (null == this.basicRecycler) {
+            this.basicRecycler = findViewById(R.id.skeleton_recycler_list);
+        }
     }
 }

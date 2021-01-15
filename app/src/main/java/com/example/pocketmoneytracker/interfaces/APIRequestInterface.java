@@ -6,7 +6,7 @@ import java.util.Map;
 
 public interface APIRequestInterface {
 
-    void sendRequest(ApiRequestMethod requestMethod, String endPoint, Map<String, Object> rawData);
+    void sendRequestWithData(ApiRequestMethod requestMethod, String endPoint, Map<String, Object> rawData);
 
     void sendRequest(ApiRequestMethod requestMethod, String endPoint);
 
