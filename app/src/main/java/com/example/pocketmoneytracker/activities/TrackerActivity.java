@@ -3,13 +3,13 @@ package com.example.pocketmoneytracker.activities;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.pocketmoneytracker.R;
+import com.example.pocketmoneytracker.abstractClasses.AbstractRequestActivity;
 import com.example.pocketmoneytracker.adapter.TransactionAdapter;
 import com.example.pocketmoneytracker.datasource.TransactionApiObjectRequestObject;
 import com.example.pocketmoneytracker.enums.DynamicEnvValue;
@@ -18,7 +18,6 @@ import com.example.pocketmoneytracker.enums.TransactionType;
 import com.example.pocketmoneytracker.helpers.ActivityLauncher;
 import com.example.pocketmoneytracker.helpers.DynamicEnvSelector;
 import com.example.pocketmoneytracker.helpers.ViewFormatter;
-import com.example.pocketmoneytracker.interfaces.ResponseHandlerInterface;
 import com.example.pocketmoneytracker.models.BalanceCalculator;
 import com.example.pocketmoneytracker.models.Transaction;
 import com.example.pocketmoneytracker.responseObjects.TransactionResponseObject;
@@ -26,7 +25,7 @@ import com.example.pocketmoneytracker.responseObjects.TransactionResponseObject;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class TrackerActivity extends AppCompatActivity implements ResponseHandlerInterface {
+public class TrackerActivity extends AbstractRequestActivity {
 
     TransactionApiObjectRequestObject transactionApiObject;
     RecyclerView basicRecycler;
@@ -61,7 +60,7 @@ public class TrackerActivity extends AppCompatActivity implements ResponseHandle
         if(null != transactions) {
             basicRecycler.setAdapter(new TransactionAdapter(transactions));
         }
-        }
+    }
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -106,7 +105,7 @@ public class TrackerActivity extends AppCompatActivity implements ResponseHandle
         activityLauncher.launchActivity("activities", "AddTransactionActivity", this, null);
     }
 
-    private void initTransactionApiObject() {
+    public void initTransactionApiObject() {
         EnvVar apiBase = DynamicEnvSelector.EnvVar(DynamicEnvValue.API_BASE);
         assert apiBase != null;
         this.transactionApiObject = new TransactionApiObjectRequestObject(apiBase.getVar(), new TransactionResponseObject(), this, this);
