@@ -53,7 +53,7 @@ public class TrackerActivity extends AbstractRequestActivity {
 
     private void updateAdapter() {
         if (null == basicRecycler) {
-            setupRecycler();
+            setupView();
         }
         basicRecycler.setAdapter(null);
         if(null != transactions) {
@@ -133,6 +133,7 @@ public class TrackerActivity extends AbstractRequestActivity {
 
         if (null == this.basicRecycler) {
             this.basicRecycler = findViewById(R.id.skeleton_recycler_list);
+            setupRecycler();
         }
     }
 }
