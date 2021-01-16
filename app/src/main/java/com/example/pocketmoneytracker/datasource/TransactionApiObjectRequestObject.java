@@ -24,6 +24,6 @@ public class TransactionApiObjectRequestObject extends ApiVolleyRequestObject {
     }
 
     public void submitSingleTransaction(Map<String,Object> data) {
-        this.sendRequest(ApiRequestMethod.POST,"/transactions", data);
+        this.sendRequestWithData(ApiRequestMethod.POST,"/transactions", data);
     }
 }

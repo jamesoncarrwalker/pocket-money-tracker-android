@@ -40,8 +40,8 @@ public class ApiVolleyRequestObject extends AbstractApiRequest {
 
 
     @Override
-    public void sendRequest(ApiRequestMethod requestMethod, String endPoint, Map<String, Object> rawData) {
-        super.sendRequest(requestMethod, endPoint, rawData);
+    public void sendRequestWithData(ApiRequestMethod requestMethod, String endPoint, Map<String, Object> rawData) {
+        super.sendRequestWithData(requestMethod, endPoint, rawData);
         this.submitRequest();
     }
 

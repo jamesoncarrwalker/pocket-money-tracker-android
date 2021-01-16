@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.AddTransactionActivity"/>
+        <activity android:name=".abstractClasses.AbstractRequestActivity" />
     </application>
 
 </manifest>

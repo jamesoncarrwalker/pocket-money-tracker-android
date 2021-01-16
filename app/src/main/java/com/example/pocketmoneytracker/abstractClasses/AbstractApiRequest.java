@@ -36,7 +36,7 @@ public abstract class AbstractApiRequest implements APIRequestInterface {
     }
 
     @Override
-    public void sendRequest(ApiRequestMethod requestMethod, String endPoint, Map<String, Object> rawData) {
+    public void sendRequestWithData(ApiRequestMethod requestMethod, String endPoint, Map<String, Object> rawData) {
         this.requestMethod = requestMethod;
         this.endpoint = endPoint;
         this.rawData = rawData;
