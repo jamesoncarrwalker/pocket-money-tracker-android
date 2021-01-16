@@ -81,12 +81,14 @@
                 android:id="@+id/credit_input_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="selectTransactionType"
                 android:text="Credit" />
 
             <RadioButton
                 android:id="@+id/spend_input_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="selectTransactionType"
                 android:text="Spend" />
 
         </RadioGroup>
@@ -94,13 +96,22 @@
 
     <android.support.constraint.ConstraintLayout
 
-        android:id="@+id/transaction_submit_wrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/transaction_type_wrapper"
-        app:layout_constraintStart_toStartOf="parent">
+        android:id="@+id/transaction_submit_error_wrapper"
+        android:layout_width="407dp"
+        android:layout_height="335dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/transaction_type_wrapper">
 
 
+        <TextView
+            android:id="@+id/submit_transaction_error_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
     <Button

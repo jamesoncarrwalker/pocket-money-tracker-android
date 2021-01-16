@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.pocketmoneytracker.enums.ApiRequestMethod;
 import com.example.pocketmoneytracker.interfaces.ResponseHandlerInterface;
 import com.example.pocketmoneytracker.interfaces.ResponseObjectInterface;
+import com.example.pocketmoneytracker.utils.Logging;
 
 import java.util.Map;
 
@@ -24,6 +25,7 @@ public class TransactionApiObjectRequestObject extends ApiVolleyRequestObject {
     }
 
     public void submitSingleTransaction(Map<String,Object> data) {
+        Logging.logStr("ABOUT TO SUBMIT","line 28");
         this.sendRequestWithData(ApiRequestMethod.POST,"/transactions", data);
     }
 }

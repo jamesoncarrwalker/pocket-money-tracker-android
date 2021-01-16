@@ -36,6 +36,7 @@ public class TrackerActivity extends AbstractRequestActivity {
     ActivityLauncher activityLauncher;
     BalanceCalculator balanceCalculator;
 
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +70,7 @@ public class TrackerActivity extends AbstractRequestActivity {
         } else {
             setBalance();
         }
-
+        setupView();
         ViewFormatter.formatTransactionTextView(this.transactionAmountView, this.totalBalanceTransactionType, this.totalBalance);
     }
 
